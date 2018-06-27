@@ -2,4 +2,4 @@
 
 Team Hash Brown in 2018 Hdac Blockchain Hackathon held by Hyundai
 
-[Hackathon Page](http://http://hdachackathon.com)
+[Hackathon Page](http://hdachackathon.com)
