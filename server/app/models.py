@@ -84,7 +84,7 @@ class User(db.Model):
             'ethereum_id': self.ethereum_id,
             'tier': self.tier,
             'balance': self.balance,
-            'stars': [ star.id for star in self.stars ],
+            'stars': [ star.news_id for star in self.stars ],
             'starcount': self.stars.count(),
         }
         return json_user
@@ -109,6 +109,8 @@ class News(db.Model):
     __tablename__ = 'news'
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    field = db.Column(db.Text)
+    title = db.Column(db.Text)
     context = db.Column(db.Text, nullable=False)
     parsed_context = db.Column(db.Text)
     created_at = db.Column(db.DateTime, index=True,
@@ -123,7 +125,9 @@ class News(db.Model):
                     lazy='dynamic',
                     cascade='all, delete-orphan') 
 
-    def __init__(self, context, parsed_context, author=None, refutation=False):
+    def __init__(self, field, title, context, parsed_context, author=None, refutation=False):
+        self.field = field
+        self.title = title
         self.context = context
         self.parsed_context = parsed_context
         self.refutation = refutation
@@ -139,23 +143,32 @@ class News(db.Model):
             'id': self.id,
             'author': self.author.username,
             'author_name': self.author.realname,
+            'field': self.field,
+            'title': self. title,
             'context': self.context,
             'created_at': self.created_at,
             'parent_id': self.parent_id,
 	    'refutation': self.refutation,
-            'stars': [ star.username for star in self.stars ],
+            'stars': [ star.user_id for star in self.stars ],
+            'starcount': self.stars.count(),
             'associated_reply': self.associated.count()
         }
         return json_news
 
     @staticmethod
     def from_json(json_news):  # json 입력 루틴
+        field = json_news.get('field')
+        title = json_news.get('title')
         context = json_news.get('context')
+        if field is None or field == '':
+            raise ValidationError('news does not have a field')
+        if title is None or title == '':
+            raise ValidationError('news does not have a title')
         if context is None or context == '':
             raise ValidationError('news does not have a context')
         parsed_context = removeEscapeChar(context).lower()
 
-        news = News(context=context, parsed_context=parsed_context)
+        news = News(field=field, title=title, context=context, parsed_context=parsed_context)
         return news
 
 
