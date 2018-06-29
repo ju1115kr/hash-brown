@@ -1,0 +1,12 @@
+*/*.sqlite
+*.wsgi
+*.pyc
+*.swp
+*.swo
+*/__pycache__
+*~
+venv/
+app/data-test.sqlite
+nohup*
+migrations/*
+.idea
