@@ -8,7 +8,7 @@ Team Hash Brown in 2018 Hdac Blockchain Hackathon held by Hyundai
 
 ### Project Leader
 
-* [powerberry](https://github.com/powerberry) - Leading this Project and members
+* [powerberry1](https://github.com/powerberry1) - Leading this Project and members
 
 ### Project Planning and Back-end Developer
 
