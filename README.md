@@ -23,7 +23,7 @@ Team Hash Brown in 2018 Hdac Blockchain Hackathon held by Hyundai Pay
 
 * [jiyun075](https://github.com/jiyun075) - Web View Design
 * [kmswin1](https://github.com/kmswin1) - RESTful API for Frontend-Backend
-* [KSH94](https://github.com/KSH94) - Supporting to Web Layout
+* [KSH94](https://github.com/KSH94) - Supporting to Web Layout and some snacks
 
 ### Designer
 
