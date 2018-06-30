@@ -86,7 +86,6 @@ def delete_news(news_id):
         return not_found('News does not exist')
     if g.current_user.id != news.author_id:
         return forbidden('Cannot delete other user\'s news')
-    Comment.query.filter(Comment.news_id == news.id).delete()
     db.session.delete(news)
     db.session.commit()
     return '', 204
