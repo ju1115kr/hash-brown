@@ -125,12 +125,11 @@ class News(db.Model):
                     lazy='dynamic',
                     cascade='all, delete-orphan') 
 
-    def __init__(self, field, title, context, parsed_context, author=None, refutation=False):
+    def __init__(self, field, title, context, parsed_context, author=None):
         self.field = field
         self.title = title
         self.context = context
         self.parsed_context = parsed_context
-        self.refutation = refutation
         if author is not None:
             self.author_name = author.realname
             self.author = author
