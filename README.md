@@ -1,6 +1,6 @@
 # 2018 Hdac Hackathon
 
-Team Hash Brown in 2018 Hdac Blockchain Hackathon held by Hyundai
+Team Hash Brown in 2018 Hdac Blockchain Hackathon held by Hyundai Pay
 
 [Hackathon Page](http://hdachackathon.com) - Official Page about this Hackathon
 
@@ -8,7 +8,7 @@ Team Hash Brown in 2018 Hdac Blockchain Hackathon held by Hyundai
 
 ### Project Leader
 
-* [powerberry](https://github.com/powerberry) - Leading this Project and members
+* [powerberry1](https://github.com/powerberry1) - Leading this Project and members
 
 ### Project Planning and Back-end Developer
 
@@ -23,7 +23,7 @@ Team Hash Brown in 2018 Hdac Blockchain Hackathon held by Hyundai
 
 * [jiyun075](https://github.com/jiyun075) - Web View Design
 * [kmswin1](https://github.com/kmswin1) - RESTful API for Frontend-Backend
-* [KSH94](https://github.com/KSH94) - Supporting to Web Layout
+* [KSH94](https://github.com/KSH94) - Supporting to Web Layout and some snacks
 
 ### Designer
 
