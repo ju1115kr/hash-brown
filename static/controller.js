@@ -1,19 +1,14 @@
 function logIn(iid, ipass) {
-var API = 'http://35.234.3.182:9009/api/v1.0/users';
-
-var id = iid;
-var password = ipass;
+  var id = iid
+  var password = ipass
 
   $.ajax({
-    type:'GET',
-    dataType: 'json',
-    url:'',
-    username: iid,
-    password: ipass,
-    success: funtion(data) {
-
-    }
-  });
+    type: 'GET',
+    url: "http://35.234.3.182:9009/api/v1.0/users",
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader("Authorization", "Basic " + btoa(id + ":" + password));
+    },
+  })
 }
 
 function goToNotice() {
