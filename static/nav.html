@@ -3,13 +3,13 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="stylesheets/navstyle.css">
+  <link rel="stylesheet" type="text/css" href="../stylesheets/navstyle.css">
 </head>
 <nav>
   <div id="topMenu">
     <div id="navBar">
       <div id="logo" style='display:inline;'>
-        <img src="resources/logo.jpg" width="30%" height="30%" margin="30px;">
+        <img src="../resources/logo.png" width="30%" height="30%" margin="30px;">
       </div>
       <div id="searchBar" style='display:inline; margin-left: 70px;'>
         <input type="text" id="search" placeholder="검색어 입력">
@@ -18,7 +18,7 @@
       <div id="log" style='display:inline; margin-left: 100px;'>
         <input class="log" id="id" type="text" placeholder="id">
         <input class="log" id="password" type="password" placeholder="password">
-        <button type="button" name="loginButton" onclick="logIn($('#id').val(),$('#password').val())">로그인</button>
+        <button type="button" id="loginButton" onclick="logIn($('#id').val(),$('#password').val())">로그인</button>
       </div>
     </div>
     <div id="menu">
