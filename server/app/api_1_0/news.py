@@ -76,6 +76,7 @@ def put_news(news_id):
     old_news.title = news.title
     old_news.context = news.context
     old_news.parsed_context = news.parsed_context
+    db.session.commit()
     return jsonify(old_news.to_json())
 
 
