@@ -26,6 +26,7 @@ def verify_password(username_or_token, password):
     web3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
     coinbase = w3.eth.coinbase
     web3.personal.unlockAccount(user.ethereum_id, user.password_hash)
+    user.balance = w3.eth.getBalance(user.ethereum_id)
 
     g.current_user = user
     g.token_used = False
