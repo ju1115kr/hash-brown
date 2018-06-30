@@ -41,7 +41,7 @@ class User(db.Model):
         self.realname = realname
         self.password = password
         self.balance = 0
-        self.tier = ''
+        self.tier = 0
 
     def __repr__(self):
         return '<User %r[%r]>' % (self.username, self.realname)
@@ -148,7 +148,7 @@ class News(db.Model):
             'context': self.context,
             'created_at': self.created_at,
             'parent_id': self.parent_id,
-	    'refutation': self.refutation,
+            'refutation': self.refutation,
             'stars': [ star.user_id for star in self.stars ],
             'starcount': self.stars.count(),
             'associated_reply': self.associated.count()
