@@ -3,7 +3,8 @@ from flask import current_app, make_response, request, url_for, g, jsonify, send
 from . import api
 from .authentication import auth
 from .. import db
-from ..models import User, News
+from sqlalchemy import func
+from ..models import User, News, Star
 from .errors import not_found, forbidden, bad_request
 from werkzeug import secure_filename
 import web3
@@ -43,6 +44,18 @@ def get_users():
     return jsonify({
         'users': [user.to_json() for user in users]
     }), 200
+
+
+@api.route('/users/star', methods=['GET'])
+@auth.login_required
+def get_starusers():
+    users = User.query \
+            .join(Star) \
+            .group_by(User) \
+            .order_by((func.count(User.stars)).desc())
+    return jsonify({
+        'users': [user.to_json() for user in users]
+    }) ,200
 
 
 @api.route('/users/<user_id>', methods=['PUT'])

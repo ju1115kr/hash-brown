@@ -3,7 +3,8 @@ from flask import request, jsonify, make_response, url_for, g
 from . import api
 from .authentication import auth
 from .. import db
-from ..models import User, News
+from sqlalchemy import func
+from ..models import User, News, Star
 from .errors import not_found, forbidden, bad_request
 from datetime import datetime
 from flask_cors import cross_origin
@@ -27,6 +28,20 @@ def get_news(id):
     if news is None:
         return not_found('News does not exist')
     return jsonify(news.to_json())
+
+
+@api.route('/news/star', methods=['GET'])
+@auth.login_required
+def get_all_starnews():
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 20, type=int)
+    pagination = News.query \
+            .join(Star) \
+            .group_by(News) \
+            .order_by((func.count(News.stars)).desc()) \
+            .paginate(page, per_page, error_out=False)
+    pag_news = pagination.items
+    return jsonify({'news': [news.to_json() for news in pag_news]})
 
 
 @api.route('/news', methods=['POST'])
