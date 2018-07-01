@@ -8,7 +8,6 @@
   <title>welcome to Real News Plat.</title>
   <link rel="stylesheet" type="text/css" href="../stylesheets/navstyle.css">
   <style media="screen">
-
     #content {
       width: 700px;
       padding: 20px;
@@ -60,96 +59,92 @@
 </nav>
 
 <body>
-    <div id="content">
-      <script type="text/javascript">
-        $(document).ready(function() {
-          $.ajax({
-            type: 'GET',
-            url: "http://35.234.3.182:9009/api/v1.0/news",
-            beforeSend: function(xhr) {
-              xhr.setRequestHeader("Authorization", "Basic " + btoa("t2" + ":" + "t2"));
-            },
-            data: {},
-            success: function(data) {
-              tempdata = data;
-              var init = 0;
-              for (var i = 0; i < data.length; i++) {
-                if (tempdata.news[i].title !== undefined) {
-                  init = i;
-                  break;
-                }
+  <div id="content">
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $.ajax({
+          type: 'GET',
+          url: "http://35.234.3.182:9009/api/v1.0/news",
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa("t2" + ":" + "t2"));
+          },
+          data: {},
+          success: function(data) {
+            tempdata = data;
+            var init = 0;
+            for (var i = 0; i < data.length; i++) {
+              if (tempdata.news[i].title !== undefined) {
+                init = i;
+                break;
               }
-              for (var i = init; i < init+7; i++) {
-                var tempTitle = tempdata.news[i].title;
-                var tempAuthor = tempdata.news[i].author;
-                var tempStar = tempdata.news[i].starcount;
-                var tempField = tempdata.news[i].field;
-                var tempAsso = tempdata.news[i].associated_reply;
-                var space = " ";
-                $("#articles").append("</br>"+tempField +"</br>");
-                $("#articles").append("<h3>" +space + tempTitle + space + "<img src = '../resources/user.jpg' width = 30px; height = 30px;></img>" + space + tempAuthor + "</h3>");
-                $("#articles").append("<img src = '../resources/star.jpg' width = 15px; height = 15px;></img>" + space + tempStar + space);
-                $("#articles").append("<img src = '../resources/agree.jpg' width = 15px; height = 15px;></img>" + space + tempAsso + "</br>");
-              }
+            }
+            //$("#articles").append("<img src = '../resources/goeun.jpg' height = 100px; width = 200px;></img>");
+            for (var i = init; i < init + 7; i++) {
+              var tempTitle = tempdata.news[i].title;
+              var tempAuthor = tempdata.news[i].author;
+              var tempStar = tempdata.news[i].starcount;
+              var tempField = tempdata.news[i].field;
+              var tempAsso = tempdata.news[i].associated_reply;
+              var space = " ";
+              $("#articles").append("</br><img src = '../resources/news.jpg' height = 100px; width = 200px;></img>");
+              $("#articles").append("<span>"+space + tempTitle + space);
+              $("#articles").append("<img src = '../resources/user.jpg' width = 15px; height = 15px;></img>" + space + tempAuthor + space);
+              $("#articles").append("<img src = '../resources/star.jpg' width = 15px; height = 15px;></img>" + space + tempStar + space);
+              $("#articles").append("<img src = '../resources/agree.jpg' width = 15px; height = 15px;></img></span>" + space + tempAsso + "</br><hr>");
+            }
 
-            },
-            error: function() {
-              alert("article error!");
+          },
+          error: function() {
+            alert("article error!");
+          }
+        })
+      });
+    </script>
+    <table style="width:100%" id="articles">
+    </table>
+  </div>
+  <div id="sidebar">
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $.ajax({
+          type: 'GET',
+          url: "http://35.234.3.182:9009/api/v1.0/users/star",
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa("t2" + ":" + "t2"));
+          },
+          data: {},
+          success: function(data) {
+            console.log("success");
+            tempdata = data;
+            for (var i = 0; i < tempdata.users.length; i++) {
+              var tempName = tempdata.users[i].realname;
+              var tempStar = tempdata.users[i].starcount;
+              var space = " ";
+              var count = i + 1;
+              $("#users").append(count + ". " + space + "<img src = '../resources/silver.png' height = 15px; width = 15px;></img>" + space + tempName + "<img src = '../resources/star.jpg' height = 15px; width = 15px;>" + tempStar +
+                "</br>");
             }
-          })
-        });
-      </script>
-      <table style="width:100%" id="articles">
-      </table>
+          },
+          error: function() {
+            alert("user-ranking error!");
+          }
+        })
+      });
+    </script>
+    <div id="category">
+      <h2>주제</h2>
+      <h5>정치</h5>
+      <h5>경제</h5>
+      <h5>사회</h5>
+      <h5>시사</h5>
+      <h5>연예</h5>
+      <h5>스포츠</h5>
+      <h5>기타<hr></h5>
     </div>
-    <div id="sidebar">
-      <script type="text/javascript">
-        $(document).ready(function() {
-          $.ajax({
-            type: 'GET',
-            url: "http://35.234.3.182:9009/api/v1.0/users/star",
-            beforeSend: function(xhr) {
-              xhr.setRequestHeader("Authorization", "Basic " + btoa("t2" + ":" + "t2"));
-            },
-            data: {},
-            success: function(data) {
-              console.log("success");
-              tempdata = data;
-              for (var i = 0; i < tempdata.users.length; i++) {
-                var tempName = tempdata.users[i].realname;
-                var tempStar = tempdata.users[i].starcount;
-                var space = " ";
-                var count = i + 1;
-                $("#users").append(count + ". " + space + "<img src = '../resources/diamond.png' height = 15px; width = 15px;></img>" + space + tempName + "<img src = '../resources/star.jpg' height = 15px; width = 15px;>" + tempStar + "</br>");
-              }
-            },
-            error: function() {
-              alert("user-ranking error!");
-            }
-          })
-        });
-      </script>
-      <table id="category">
-        <h2>주제</h2>
-        <tr>정치</br>
-        </tr>
-        <tr>경제</br>
-        </tr>
-        <tr>사회</br>
-        </tr>
-        <tr>시사</br>
-        </tr>
-        <tr>연예</br>
-        </tr>
-        <tr>스포츠</br>
-        </tr>
-        <tr>기타</br>
-        </tr>
-      </table>
-      <table id="users">
-        <h2>유저순위</h2>
-      </table>
-    </div>
+    <table id="users">
+      <h2>유저순위</h2>
+    </table>
+  </div>
 </body>
 
 </html>

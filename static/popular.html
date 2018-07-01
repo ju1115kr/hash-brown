@@ -83,17 +83,18 @@
               }
             }
 
-            for (var i = init; i < init+7; i++) {
+            for (var i = init; i < init + 7; i++) {
               var tempTitle = tempdata.news[i].title;
               var tempAuthor = tempdata.news[i].author;
               var tempStar = tempdata.news[i].starcount;
               var tempField = tempdata.news[i].field;
               var tempAsso = tempdata.news[i].associated_reply;
               var space = " ";
-              $("#articles").append("</br>"+tempField +"</br>");
-              $("#articles").append("<h3>" +space + tempTitle + space + "<img src = '../resources/user.jpg' width = 30px; height = 30px;></img>" + space + tempAuthor + "</h3>");
+              $("#articles").append("</br><img src = '../resources/news.jpg' height = 100px; width = 200px;></img>");
+              $("#articles").append("<span>"+space + tempTitle + space);
+              $("#articles").append("<img src = '../resources/user.jpg' width = 15px; height = 15px;></img>" + space + tempAuthor + space);
               $("#articles").append("<img src = '../resources/star.jpg' width = 15px; height = 15px;></img>" + space + tempStar + space);
-              $("#articles").append("<img src = '../resources/agree.jpg' width = 15px; height = 15px;></img>" + space + tempAsso + "</br>");
+              $("#articles").append("<img src = '../resources/agree.jpg' width = 15px; height = 15px;></img></span>" + space + tempAsso + "</br><hr>");
             }
 
           },
@@ -124,7 +125,8 @@
               var tempStar = tempdata.users[i].starcount;
               var space = " ";
               var count = i + 1;
-              $("#users").append(count + ". " + space + "<img src = '../resources/diamond.png' height = 15px; width = 15px;></img>" + space + tempName + "<img src = '../resources/star.jpg' height = 15px; width = 15px;>" + tempStar + "</br>");
+              $("#users").append(count + ". " + space + "<img src = '../resources/silver.png' height = 15px; width = 15px;></img>" + space + tempName + "<img src = '../resources/star.jpg' height = 15px; width = 15px;>" + tempStar +
+                "</br>");
             }
           },
           error: function() {
@@ -133,23 +135,16 @@
         })
       });
     </script>
-    <table id="category">
+    <div id="category">
       <h2>주제</h2>
-      <tr>정치</br>
-      </tr>
-      <tr>경제</br>
-      </tr>
-      <tr>사회</br>
-      </tr>
-      <tr>시사</br>
-      </tr>
-      <tr>연예</br>
-      </tr>
-      <tr>스포츠</br>
-      </tr>
-      <tr>기타</br>
-      </tr>
-    </table>
+      <h5>정치</h5>
+      <h5>경제</h5>
+      <h5>사회</h5>
+      <h5>시사</h5>
+      <h5>연예</h5>
+      <h5>스포츠</h5>
+      <h5>기타<hr></h5>
+    </div>
     <table id="users">
       <h2>유저순위</h2>
     </table>

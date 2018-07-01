@@ -12,7 +12,7 @@ function logIn(iid, ipass) {
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Authorization", "Basic " + btoa(id + ":" + password));
       },
-      data : {},
+      data: {},
       success: function(data) {
         alert("로그인 되었습니다.");
         $("#id").remove();
@@ -20,7 +20,7 @@ function logIn(iid, ipass) {
         $("#loginButton").remove();
         $("#log").append("<img src = '../resources/hyogyung.jpg' style = 'width: 50px, height: auto'></img>");
       },
-      error: function () {
+      error: function() {
         alert("아이디 또는 패스워드가 틀렸습니다");
       }
     })
@@ -29,7 +29,7 @@ function logIn(iid, ipass) {
 
 function goToNotice() {
   location.href = "notice.html";
-  $("#notice").css("text-color","red");
+  $("#notice").css("text-color", "red");
 }
 
 function goToPopular() {
