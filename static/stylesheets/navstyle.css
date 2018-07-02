@@ -1,0 +1,54 @@
+<style media="screen">
+  #topMenu {
+    height: 150px;
+    background-color: #A5E3E6;
+  }
+  #menu {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    padding: 10px;
+    border: 1px dotted;
+  }
+  input#search {
+    width: 30%;
+    border: 1px solid #B3ABBA;
+    border-radius: 10px;
+    font-size: 10pt;
+    font-family: 'kopub dotum';
+    background-size: 20px;
+    background-position: 95% center;
+    opacity: 0.5;
+    letter-spacing: -0.3px;
+  }
+  button {
+    width: 60px;
+    border-radius: 10px;
+    height: auto;
+    background: #1b5ac2;
+    outline: none;
+    color: #ffffff;
+  }
+  .menubtn {
+    width: 70px;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 10px;
+    height: auto;
+    outline: none;
+    color: rgb(143,143,143);
+    font-weight: bold;
+    font-family: fantasy;
+  }
+  input.log {
+    width: 70px;
+    border: 1px solid #B3ABBA;
+    border-radius: 10px;
+    font-size: 10pt;
+    font-family: 'kopub dotum';
+    background-size: 20px;
+    background-position: 95% center;
+    opacity: 0.5;
+    letter-spacing: -0.3px;
+  }
+</style>

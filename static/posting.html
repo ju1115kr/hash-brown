@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="./posting.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/navstyle.css">
+</head>
+<nav>
+	<div id="topMenu">
+		<div id="navBar">
+			<div id="logo" style='display:inline;'>
+				<img src="resources/logo.jpg" width="30%" height="30%" margin="30px;">
+			</div>
+			<div id="searchBar" style='display:inline; margin-left: 70px;'>
+				<input type="text" id="search" placeholder="검색어 입력">
+				<button type="button" name="searchButton">검색</button>
+			</div>
+			<div id="log" style='display:inline; margin-left: 100px;'>
+				<input class="log" id="id" type="text" placeholder="id">
+				<input class="log" id="password" type="password" placeholder="password">
+				<button type="button" name="loginButton" onclick="logIn($('#id').val(),$('#password').val())">로그인</button>
+			</div>
+		</div>
+		<div id="menu">
+			<a class="menubtn" type="button" name="button" onclick="goToNotice()">공지사항</a>
+			<a class="menubtn" type="button" name="button" onclick="goToPopular()">인기글</a>
+			<a class="menubtn" type="button" name="button" onclick="goToDashboard()">최신글</a>
+			<a class="menubtn" type="button" name="button" onclick="goToRanking()">순위</a>
+			<a class="menubtn" type="button" name="button" onclick="goToWritePage()">글쓰기</a>
+		</div>
+
+		<body>
+			<div id="main">
+				<div id="title">
+					<strong>대표기사/찬성기사/반대기사 글쓰기
+						<br />
+					</strong>
+					<hr />
+					<br />
+				</div>
+				<form id="subject">
+					<select id="sub">
+						<option value="" disabled selected>주제</option>
+						<option value="politics">정치</option>
+						<option value="business">비즈니스</option>
+						<option value="economy">경제</option>
+						<option value="science/technology">과학/기술</option>
+						<option value="entertainment">엔터테인먼트</option>
+						<option value="sports">스포츠</option>
+						<option value="health">건강</option>
+					</select>
+
+					<div id="mainForm">
+						<div id="postingTitle">
+							<input type="text" id="titlebox" placeholder="  제목" autocomplete="off">
+						</div>
+						<div id="subForm">
+							<div id="functionForm">
+								&nbsp;
+								<select id="font">
+									<option value="arial" font-family="arial" abled selected>Arial</option>
+									<option value="timesnewroman" font-family="timesnewroman" abled selected>Times New Roman</option>
+									<option value="courier" font-family="courier" abled selected>Courier</option>
+									<option value="georgia" font-family="georgia" abled selected>Georgia</option>
+								</select>
+								&nbsp;&nbsp;
+								<input type="number" id="fontsizebox" value="10.0" min="1.0" max="500.0" >
+								&nbsp;<p id="pivotline">|</p>&nbsp;
+								<a id="bold", title="진하게">
+									<b>가</b>
+								</a>
+								<a id="italic", title="기울임">
+									<i>가</i>
+								</a>
+								<a id="underline", title="밑줄선">
+									<u>가</u>
+								</a>
+								<a id="deline", title="취소선">
+									<del>가</del>
+								</a>
+								<a id="color", title="글자 색">
+									<img src="./posting icon/color.png" width="20px", height="20px">
+								</a>
+								<a id="highlight", title="하이라이트">
+									<img src="./posting icon/highlight.png" width="20px", height="20px">
+								</a>
+								&nbsp;<p id="pivotline">|</p>&nbsp;
+								<a id="left">
+									<img src="./posting icon/left.png" width="20px", height="20px", title="왼쪽 정렬">
+								</a>
+								<a id="center">
+									<img src="./posting icon/center.png" width="20px", height="20px", title="가운데 정렬">
+								</a>
+								<a id="right">
+									<img src="./posting icon/right.png" width="20px", height="20px", title="오른쪽 정렬">
+								</a>
+								&nbsp;<p id="pivotline">|</p>&nbsp;
+								<a id="picture">
+									<img src="./posting icon/picture.png" width="20px", height="20px", title="사진 첨부">
+								</a>
+								<a id="video">
+									<img src="./posting icon/video.png" width="20px", height="20px", title="동영상 첨부">
+								</a>
+								&nbsp;<p id="pivotline">|</p>&nbsp;
+								<a id="link">
+									<img src="./posting icon/link.png" width="20px", height="20px", title="링크">
+								</a>
+								<a id="quote">
+									<img src="./posting icon/quote.png" width="20px", height="20px", title="인용">
+								</a>
+								&nbsp;<p id="pivotline">|</p>&nbsp;
+								<a id="search">
+									<img src="./posting icon/search.png" width="20px", height="20px", title="검색">
+								 </a>
+								 <input id="searching" type="text" value="검 색">
+								<!-- <button type="button"><b>가</b></button>
+						<button type="button"><i>가</i></button>
+						<button type="button"><u>가</u></button>
+						<button type="button"><del>가</del></button> -->
+
+							</div>
+							<textarea id="postBox" placeholder="  여기를 눌러 기사를 작성해보세요." autocomplete="off"></textarea>
+
+						</div>
+						<div id="postSendBar">
+							<input id="postTempStore" type="submit" value="임시저장">
+							<input id="postSubmit" type="submit" value="확인">
+						</div>
+					</div>
+				</form>
+		</body>
+
+</html>
