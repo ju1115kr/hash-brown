@@ -72,9 +72,11 @@ def put_news(news_id):
     if g.current_user.id != old_news.author_id:
         return forbidden('Cannot modify other user\'s news')  
     news = News.from_json(request.json)
+    old_news.field = news.field
+    old_news.title = news.title
     old_news.context = news.context
     old_news.parsed_context = news.parsed_context
-    old_news.modified_at = datetime.utcnow()
+    db.session.commit()
     return jsonify(old_news.to_json())
 
 
