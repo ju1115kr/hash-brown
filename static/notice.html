@@ -7,6 +7,23 @@
   <script src="controller.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style media="screen">
+    #sidebar {
+      width: 350px;
+      padding: 20px;
+      margin-bottom: 20px;
+      float: right;
+      border: 1px solid #bcbcbc;
+    }
+
+    #content {
+      width: 700px;
+      padding: 20px;
+      margin-bottom: 20px;
+      float: left;
+      border: 1px solid #bcbcbc;
+    }
+  </style>
   <title>welcome to Real News Plat.</title>
 </head>
 <nav>
@@ -15,37 +32,43 @@
       <div id="logo" style='display:inline;'>
         <img src="../resources/logo.png" width="30%" height="30%" margin="30px;">
       </div>
-      <div id="searchBar" style='display:inline; margin-left: 70px;'>
+      <div id="searchBar" style='display:inline; margin-left: 30px;'>
         <input type="text" id="search" placeholder="검색어 입력">
         <button type="button" class="btn btn-info" id="searchButton">Search</button>
       </div>
-      <div id="log" style='display:inline; margin-left: 100px;'>
+      <div id="log" style='display:inline; margin-left: 10px;'>
         <input class="log" id="id" type="text" placeholder="id">
         <input class="log" id="password" type="password" placeholder="password">
         <button type="button" class="btn btn-primary" id="loginButton" onclick="logIn($('#id').val(), $('#password').val())">Login</button>
+        <button type="button" class="btn btn-primary" id="membershipButton" onclick="showPopup()">회원가입</button>
+        <script language="javascript">
+          function showPopup() {
+            window.open("membership.html", "Membership", "width=250px, height=141px, left=500, top=100");
+          }
+        </script>
       </div>
     </div>
-    <ul class="nav" id = "menu">
-  <li class="nav-item">
-    <a class="nav-link" href="notice.html">공지사항</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="popular.html">인기글</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="dashboard.html">최신글</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="posting.html">글쓰기</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="user_rank_page.html">유저순위</a>
-  </li>
-</ul>
+    <ul class="nav" id="menu">
+      <li class="nav-item">
+        <a class="nav-link" href="notice.html">공지사항</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="popular.html">인기글</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="dashboard.html">최신글</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="posting.html">글쓰기</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="user_rank_page.html">유저순위</a>
+      </li>
+    </ul>
 </nav>
 
 <body>
-  <div class="">
+  <div id="content">
     <ul>
       <li>해쉬브라운 팀 입니다.</li>
       <li>Real News Platform</li>
@@ -53,6 +76,59 @@
       <li>입상 하면 좋겠다 ㅎㅎㅎ</li>
       <img src="../resources/hash.jpg">
     </ul>
+  </div>
+  <div id="sidebar">
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $.ajax({
+          type: 'GET',
+          url: "http://35.234.3.182:9009/api/v1.0/users/star",
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa("minsangkim" + ":" + "1234"));
+          },
+          data: {},
+          success: function(data) {
+            console.log("success");
+            tempdata = data;
+            for (var i = 0; i < tempdata.users.length; i++) {
+              var tempName = tempdata.users[i].realname;
+              var tempStar = tempdata.users[i].starcount;
+              var space = " ";
+              var count = i + 1;
+              if (tempStar > 99999)
+                $("#users").append(count + space + "<img src = '../resources/diamond.png' height = 30px; width = 30px;></img>");
+              else if (tempStar > 49999)
+                $("#users").append(count + space + "<img src = '../resources/platinum.png' height = 30px; width = 30px;></img>");
+              else if (tempStar > 9999)
+                $("#users").append(count + space + "<img src = '../resources/gold.png' height = 30px; width = 30px;></img>");
+              else if (tempStar > 4999)
+                $("#users").append(count + space + "<img src = '../resources/silver.png' height = 30px; width = 30px;></img>");
+              else if (tempStar >= 0)
+                $("#users").append(count + space + "<img src = '../resources/bronze.png' height = 30px; width = 30px;></img>");
+              $("#users").append(space + tempName + space + "<img src = '../resources/user.jpg' height = 30px; width = 30px;></img>" + "<img src = '../resources/star.jpg' height = 30px; width = 30px;>" + tempStar + "</br>");
+            }
+          },
+          error: function() {
+            console.log("user-ranking error!");
+          }
+        })
+      });
+    </script>
+    <div class="container">
+      <h2><span class="badge badge-secondary">주제</span></h2>
+      <h6>정치</h6>
+      <h6>경제</h6>
+      <h6>사회</h6>
+      <h6>시사</h6>
+      <h6>연예</h6>
+      <h6>스포츠</h6>
+      <h6>경제<hr></h6>
+    </div>
+    <div class="table-responsive">
+      <table class="table" id="users">
+        <h2><span class="badge badge-secondary">유저순위</span></h2>
+      </table>
+    </div>
   </div>
 </body>
 
