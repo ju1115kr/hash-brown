@@ -3,62 +3,11 @@
 <head>
   <meta charset="utf-8">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<title>랭킹</title>
   <style media="screen">
-    #topMenu {
-      height: 150px;
-      border-bottom: outset;
-      border-right: outset;
-    }
-    #menu {
-      display: flex;
-      align-items: center;
-      margin: auto;
-      padding: 10px;
-    }
-    input#search {
-      width: 30%;
-      border: 1px solid #B3ABBA;
-      border-radius: 10px;
-      font-size: 10pt;
-      font-family: 'kopub dotum';
-      background-size: 20px;
-      background-position: 95% center;
-      opacity: 0.5;
-      letter-spacing: -0.3px;
-    }
-    button {
-      width: 60px;
-      border-radius: 10px;
-      height: auto;
-      background: #1b5ac2;
-      outline: none;
-      color: #ffffff;
-    }
-    .menubtn {
-      width: 70px;
-      font-size: 13px;
-      cursor: pointer;
-      border-radius: 10px;
-      height: auto;
-      outline: none;
-      color: rgb(143,143,143);
-      font-weight: bold;
-      font-family: fantasy;
-    }
-    input.log {
-      width: 70px;
-      border: 1px solid #B3ABBA;
-      border-radius: 10px;
-      font-size: 10pt;
-      font-family: 'kopub dotum';
-      background-size: 20px;
-      background-position: 95% center;
-      opacity: 0.5;
-      letter-spacing: -0.3px;
-    }
-
     #users {
     font-size: 20px;
     padding-right: 15px;
@@ -113,17 +62,17 @@
     margin-bottom: 20px;
     float: left;
     text-align: left;
-    font-size: 30px;\
+    font-size: 30px;
     }
     #userlist{
     float: left;
     text-align: left;
-    font-size: 30px;\
+    font-size: 30px;
     }
     #user_star{
     float: right;
     text-align: left;
-    font-size: 30px;\
+    font-size: 30px;
     }
   </style>
 </head>
@@ -132,7 +81,7 @@
   <div id="topMenu">
     <div id="navBar">
       <div id="logo" style='display:inline;'>
-        <img src="../resources/logo.png" width="30%" height="30%" margin="30px;">
+        <img src="resources/logo.png" width="30%" height="30%" margin="30px;">
       </div>
       <div id="searchBar" style='display:inline; margin-left: 70px;'>
         <input type="text" id="search" placeholder="검색어 입력">
@@ -190,7 +139,7 @@
         $(document).ready(function() {
           $.ajax({
             type: 'GET',
-            url: "http://35.234.3.182:9009/api/v1.0/users/star",
+            url: "http://35.234.3.182:9009/api/v1.0/users",
             beforeSend: function(xhr) {
               xhr.setRequestHeader("Authorization", "Basic " + btoa("ksh" + ":" + "ksh"));
             },
@@ -228,8 +177,8 @@
         유저랭킹<br>
         <div id="user_search">
           <div style="height: 40px; width:400px; border: 1px solid #1b5ac2; background: #ffffff">
-            <input type="text" placeholder = "아이디 입력" id="searchid" style="font-size: 16px; width: 325px; padding: 10px; border: 0px; outline: none; float: left"/>
-            <input type="button" value="검색" id="getResult" style="width: 50px; height: 100%; border: 0px; background: #1b5ac2; outline: none; float: right; color: #ffffff"/>
+            <input type="text" placeholder = "아이디 입력" id="searchid" style="font-size: 16px; width: 300px; height: 100%; padding: 10px; border: 0px; outline: none; float: left">
+            <input type="button" value="검색" id="getResult" style="font-size: 20px; width: 75px; height: 100%; border: 0px; background: #1b5ac2; outline: none; float: right; color: #ffffff">
             <script type="text/javascript">
               $("#getResult").click(function() {
                 var $id = $("#searchid").val();
