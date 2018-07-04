@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="stylesheets/article.css"> <!--article css-->
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript">
+      /* get news_id */
+      var news_id_param;
+      var newsAuthorURL = "";
+      var assocNewsId;
+
+      function getParameter () {
+        var param = location.search;
+        var temp = param.split("=");
+        getparam = unescape(temp[1]);
+        news_id_param = getparam;
+      }
+      getParameter();
+
+      console.log(news_id_param);
+
+      /*
+      $(document).ready(function() {
+        var naverurl = 'www.naver.com/';
+        var tempJson = {"news": [{"id": 1, "title": "기사제목1", "starcount": 4, "refutation": true},
+                                 {"id": 2, "title": "기사제목2", "starcount": 10, "refutation": false},
+                                 {"id": 3, "title": "기사제목3", "starcount": 16, "refutation": true},
+                                 {"id": 4, "title": "기사제목4", "starcount": 1, "refutation": false},
+                                 {"id": 5, "title": "기사제목5", "starcount": 9, "refutation": false}]};
+
+        for(var i=0; i<tempJson["news"].length; i++) {
+          var news_data = tempJson["news"][i];
+          var str = "";
+          var assocId = tempJson.news[i].id;
+          var assocTitle = tempJson.news[i].title;
+          var assocStar = tempJson.news[i].starcount;
+          var refutation = tempJson.news[i].refutation;
+
+          assocNewsId = assocId;
+
+          str = "<span id=\"" + assocId + "\" onclick=\"openAssocNews(event);\" style=\"font-size:20px; font-weight: bold;\">" + assocTitle + "</span>";
+          str = str + "<img src=\"resources/star.jpg\" width=\"15px\" height=\"15px\">";
+          str = str + "<span style=\"margin-left: 5px;\">" + assocStar +"</span>";
+          str = "<div>" + str +"</div>";
+          str = str + "<div style=\"margin-top: 5px; border-bottom: 2px solid #E0E0E0;\"></div>";
+          str = "<div class=\"contents2\">" + str + "</div>";
+
+          if (refutation) {
+            $('#oppositionItems').append(str);
+          }
+          else {
+            $('#agreeItems').append(str);
+          }
+        }
+      });
+      */
+
+      /* news */
+      $(document).ready(function() {
+        $.ajax({
+          type: 'GET',
+          url: "http://35.234.3.182:9009/api/v1.0/news/" + news_id_param,
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa("jiyoon075" + ":" + "rlawldbs"));
+          },
+          data: {},
+          success: function(data) {
+            var newsTitle = document.createTextNode(data["title"]);
+            var newsContents = document.createTextNode(data["context"])
+            var newsAuthor = document.createTextNode(data["author_name"])
+            var newsCreatedAt = document.createTextNode(data["created_at"])
+            var newsField = document.createTextNode(data["field"])
+            var starCount = document.createTextNode(data["starcount"])
+
+            newsAuthorURL = data["author"];
+            newsAuthor = "<b onclick=\"authorInfo(newsAuthorURL)\">" + newsAuthor + "</b>";
+
+            $('#newsAuthor').append(newsAuthor);
+            $('#newsContents').append(newsContents);
+            $('#newsTitle').append(newsTitle);
+            $('#newsAuthor').append(newsAuthor);
+            $('#newsCreatedAt').append(newsCreatedAt);
+            $('#newsField').append(newsField);
+            $('#starCount').append(starCount);
+          },
+          error: function() {
+            console.log("fail");
+          }
+        })
+      });
+
+      /* relevant articles */
+      $(document).ready(function() {
+        $.ajax({
+          type: 'GET',
+          url: "http://35.234.3.182:9009/api/v1.0/news/" + news_id_param + "/associate",
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa("jiyoon075" + ":" + "rlawldbs"));
+          },
+          data: {},
+          success: function(data) {
+
+            for(var i=0; i<data["news"].length; i++) {
+              var news_data = data["news"][i];
+              var str = "";
+              var assocId = data.news[i].id;
+              var assocTitle = data.news[i].title;
+              var assocStar = data.news[i].starcount;
+              var refutation = data.news[i].refutation;
+
+              str = "<span id=\"" + assocId + "\" onclick=\"openAssocNews(event);\" style=\"font-size:20px; font-weight: bold;\">" + assocTitle + "</span>";
+              str = str + "<img src=\"../resources/star.jpg\" width=\"15px\" height=\"15px\">";
+              str = str + "<span style=\"margin-left: 5px;\">" + assocStar +"</span>";
+              str = "<div>" + str +"</div>";
+              str = str + "<div style=\"margin-top: 5px; border-bottom: 2px solid #E0E0E0;\"></div>";
+              str = "<div class=\"contents2\">" + str + "</div>";
+
+              if (refutation) {
+                $('#oppositionItems').append(str);
+              }
+              else {
+                $('#agreeItems').append(str);
+              }
+            }
+          },
+          error: function() {
+            console.log("fail");
+          }
+        })
+      });
+    </script>
+  </head>
+
+  <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- 0. Nav -->
+  <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <nav>
+  <div id="topMenu">
+    <div id="navBar">
+      <div id="logo" style='display:inline;'>
+        <img src="resources/logo.png" width="30%" height="30%" margin="30px;">
+      </div>
+      <div id="searchBar" style='display:inline; margin-left: 70px;'>
+        <input type="text" id="search" placeholder="검색어 입력">
+        <button type="button" class="btn btn-info" id="searchButton">Search</button>
+      </div>
+      <div id="log" style='display:inline; margin-left: 100px;'>
+        <input class="log" id="id" type="text" placeholder="id">
+        <input class="log" id="password" type="password" placeholder="password">
+        <button type="button" class="btn btn-primary" id="loginButton" onclick="logIn($('#id').val(), $('#password').val())">Login</button>
+      </div>
+    </div>
+    <ul class="nav" id = "menu">
+  <li class="nav-item">
+    <a class="nav-link disabled" href="notice.html">공지사항</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="popular.html">인기글</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="dashboard.html">최신글</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="posting.html">글쓰기</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="user_rank_page.html">유저순위</a>
+  </li>
+</ul>
+</nav>
+
+  <body>
+    <div id="news">
+      <header>
+
+      </header>
+      <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+      <!-- 1. News Article-->
+      <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+      <section style="margin-top: 30px;" id="newsArticle">
+        <article>
+          <header>
+            <div style="margin-bottom: 10px; width: 100%; height:30px">
+              <div id="newsField" style="border: 2px outset #3399FF; padding: 3px; clear: both; float: left;">
+                <!-- newsField -->
+              </div>
+            </div>
+            <div id="newsTitle" style="padding-bottom: 10px; font-size: 30px !important; font-weight: bold; margin-bottom: 10px;">
+              <!-- newsTitle -->
+            </div>
+            <div style="padding-bottom: 10px;">
+              <img src="../resources/user.jpg" width="25px" height="25px">
+              <span id="newsAuthor"></span>
+              <img src="../resources/grade.jpg" width="10px" height="10px">
+            </div>
+            <div style=" border-bottom: 3px solid #E0E0E0; margin-bottom: 5px;"></div>
+            <time id="newsCreatedAt"></time>
+          </header>
+          <div style="margin: 20px;"></div>
+          <div class="contents1" id="newsContents">
+            <!-- newsContents -->
+          </div>
+          <div style="float: right">
+            <a onclick = "writeFors()" style="padding-right: 5px;"><u style="font_size: 15px">수정</u></a>
+            <a onclick = "writeFors()" style="padding-right: 10px;"><u>삭제</u></a>
+          </div>
+          <div style="margin-top: 10px; border-bottom: 2px solid #E0E0E0; padding-bottom: 20px;"></div>
+          <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+          <!-- star / share / donate buttons -->
+          <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+          <footer>
+            <div class="partition" style="margin-bottom: 10px; border-bottom: 2px solid #E0E0E0;">
+              <div style="height: 25px; padding:10px; border-right:2px solid #E0E0E0; margin-bottom: 3px">
+                <img id="starimg" src="../resources/star.jpg" width="20px" height="20px" margin= "30px" onclick="clickStar()">
+                <span id="starCount" style="font-size: 18px;"></span>
+                <span style="margin: 8px; border-right: 2px solid #E0E0E0;"></span>
+                <img src="../resources/facebook.png" width="20px" height="20px">
+                <img src="../resources/twitter.png" width="20px" height="20px">
+                <img src="../resources/google.png" width="20px" height="20px">
+                <img src="../resources/share.png" width="20px" height="20px">
+                <img src="../resources/bookmark.png" width="20px" height="20px">
+              </div>
+            </div>
+            <div class="partition" style="margin-bottom: 10px; padding-bottom: 15px; border-bottom: 2px solid #E0E0E0">
+              <div style="height: 25px; padding:10px; margin-bottom: 3px">
+                <img src="../resources/donate.png" height="20px" margin= "30px">
+                <span style="padding-left: 5px; font-size: 12px; font-weight: bold;">글쓴이에게 마음을 표현하세요</span>
+              </div>
+            </div>
+          </footer>
+        </article>
+      </section>
+      <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+      <!-- 2. Fors / Againsts-->
+      <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+      <section>
+        <!-- /////////////////////////////////// -->
+        <!-- AGREE -->
+        <!-- /////////////////////////////////// -->
+        <article class="partition">
+          <div class="left">
+            <div class="title2">
+              <img src="../resources/agree.jpg" width="25px" height="25px" margin= "30px">
+              <b style="font_size: 30pt">찬성기사</b>
+              <a onclick = "writeFors()"><u>글쓰기</u></a>
+              <div class="underline"></div>
+            </div>
+            <div id="agreeItems">
+              <!-- assoc_articles -->
+            </div>
+          </div>
+        </article>
+        <!-- /////////////////////////////////// -->
+        <!-- OPPOSITION -->
+        <!-- /////////////////////////////////// -->
+        <article class="partition">
+          <div class="title2">
+            <img src="../resources/opposition.jpg" width="25px" height="25px" margin= "30px;">
+            <b style="font_size: 30pt">반대기사</b>
+            <a onclick = "writeAgainsts()"><u>글쓰기</u></a>
+            <div class="underline"></div>
+          </div>
+          <div id="oppositionItems">
+            <!-- assoc_articles -->
+
+            <!--
+            <div class="contents2">
+              <div><span style="font-size:20px; font-weight: bold;">월드컵 2-0 독일 패배</span></div>
+              <div>
+                <img src="resources/star.jpg" width="10px" height="10px">
+                <span>400</span>
+                <img src="resources/agree.jpg" width="10px" height="10px">
+                <span>15</span>
+                <img src="resources/opposition.jpg" width="10px" height="10px">
+                <span>4</span>
+              </div>
+              <div class="underline"></div>
+            </div>
+            -->
+          </div>
+        </article>
+      </section>
+      <footer></footer>
+    </div>
+
+    <script src="./js/news_view.js" charset="utf-8"></script>
+  </body>
+</html>

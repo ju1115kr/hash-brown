@@ -48,24 +48,25 @@
         <button type="button" class="btn btn-primary" id="loginButton" onclick="logIn($('#id').val(), $('#password').val())">Login</button>
       </div>
     </div>
-    <ul class="nav" id = "menu">
-  <li class="nav-item">
-    <a class="nav-link disabled" href="notice.html">공지사항</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="popular.html">인기글</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="dashboard.html">최신글</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="posting.html">글쓰기</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="user_rank_page.html">유저순위</a>
-  </li>
-</ul>
+    <ul class="nav" id="menu">
+      <li class="nav-item">
+        <a class="nav-link disabled" href="notice.html">공지사항</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="popular.html">인기글</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="dashboard.html">최신글</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="posting.html">글쓰기</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="user_rank_page.html">유저순위</a>
+      </li>
+    </ul>
 </nav>
+
 <body>
   <div id="content">
     <script type="text/javascript">
@@ -94,10 +95,10 @@
               var tempField = tempdata.news[i].field;
               var tempAsso = tempdata.news[i].associated_reply;
               var news_id = tempdata.news[i].id;
-              var url = "temp.html?news_id=" + news_id;
+              var url = "news_view.html?news_id=" + news_id;
               var space = " ";
               $("#articles").append("</br><img src = '../resources/news.jpg' height = 100px; width = 200px;></img>");
-              $("#articles").append("<span><a href = " + url + ">"+space + tempTitle + space);
+              $("#articles").append("<span><a href = " + url + ">" + space + tempTitle + space);
               $("#articles").append("</a></br><img src = '../resources/user.jpg' width = 15px; height = 15px;></img>" + space + tempAuthor + space);
               $("#articles").append("<img src = '../resources/star.jpg' width = 15px; height = 15px;></img>" + space + tempStar + space);
               $("#articles").append("<img src = '../resources/agree.jpg' width = 15px; height = 15px;></img></span>" + space + tempAsso + "</br><hr>");
@@ -131,8 +132,18 @@
               var tempStar = tempdata.users[i].starcount;
               var space = " ";
               var count = i + 1;
-              $("#users").append(count + ". " + space + "<img src = '../resources/silver.png' height = 15px; width = 15px;></img>" + space + tempName + "<img src = '../resources/star.jpg' height = 15px; width = 15px;>" + tempStar +
-                "</br>");
+              if (tempStar > 99999)
+                $("#users").append("<img src = '../resources/diamond.png' height = 30px; width = 30px;></img>");
+              else if (tempStar > 49999)
+                $("#users").append("<img src = '../resources/platinum.png' height = 30px; width = 30px;></img>");
+              else if (tempStar > 9999)
+                $("#users").append("<img src = '../resources/gold.png' height = 30px; width = 30px;></img>");
+              else if (tempStar > 4999)
+                $("#users").append("<img src = '../resources/silver.png' height = 30px; width = 30px;></img>");
+              else if (tempStar >= 0)
+                $("#users").append("<img src = '../resources/bronze.png' height = 30px; width = 30px;></img>");
+              $("#users").append(space + tempName + space + "<img src = '../resources/user.jpg' height = 30px; width = 30px;></img>" + "<img src = '../resources/star.jpg' height = 30px; width = 30px;>" + tempStar + "</br>");
+
             }
           },
           error: function() {
@@ -141,21 +152,21 @@
         })
       });
     </script>
-      <div class="container">
-        <h2><span class="badge badge-secondary">주제</span></h2>
-        <h6>정치</h6>
-        <h6>경제</h6>
-        <h6>사회</h6>
-        <h6>시사</h6>
-        <h6>연예</h6>
-        <h6>스포츠</h6>
-        <h6>경제<hr></h6>
-      </div>
-      <div class="table-responsive">
-        <table class = "table" id="users">
-          <h2><span class="badge badge-secondary">유저순위</span></h2>
-        </table>
-      </div>
+    <div class="container">
+      <h2><span class="badge badge-secondary">주제</span></h2>
+      <h6>정치</h6>
+      <h6>경제</h6>
+      <h6>사회</h6>
+      <h6>시사</h6>
+      <h6>연예</h6>
+      <h6>스포츠</h6>
+      <h6>경제<hr></h6>
+    </div>
+    <div class="table-responsive">
+      <table class="table" id="users">
+        <h2><span class="badge badge-secondary">유저순위</span></h2>
+      </table>
+    </div>
   </div>
 </body>
 
