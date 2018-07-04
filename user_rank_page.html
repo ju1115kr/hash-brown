@@ -129,29 +129,38 @@
 </head>
 
 <nav>
-  <div id = "topMenu">
-    <div id = "navBar">
-      <div id = "logo" style= 'display:inline;'>
-        <img src="resources/rnp-logo.png" width="30%" height="30%" margin= "30px;">
+  <div id="topMenu">
+    <div id="navBar">
+      <div id="logo" style='display:inline;'>
+        <img src="../resources/logo.png" width="30%" height="30%" margin="30px;">
       </div>
-      <div id = "searchBar" style= 'display:inline; margin-left: 70px;'>
-        <input type="text" id = "search" placeholder="검색어 입력">
-        <button type="button" name="searchButton">검색</button>
+      <div id="searchBar" style='display:inline; margin-left: 70px;'>
+        <input type="text" id="search" placeholder="검색어 입력">
+        <button type="button" class="btn btn-info" id="searchButton">Search</button>
       </div>
-      <div id ="log" style = 'display:inline; margin-left: 100px;'>
-        <input class = "log" id = "id" type="text" placeholder="id">
-        <input class = "log" id = "password" type="password" placeholder="password">
-        <button type="button" name="loginButton" onclick="logIn($('#id').val(),$('#password').val())">로그인</button>
+      <div id="log" style='display:inline; margin-left: 100px;'>
+        <input class="log" id="id" type="text" placeholder="id">
+        <input class="log" id="password" type="password" placeholder="password">
+        <button type="button" class="btn btn-primary" id="loginButton" onclick="logIn($('#id').val(), $('#password').val())">Login</button>
       </div>
     </div>
-    <div id = "menu">
-      <a class = "menubtn" type="button" name="button" onclick = "goToNotice()">공지사항</a>
-      <a class = "menubtn" type="button" name="button" onclick = "goToPopular()">인기글</a>
-      <a class = "menubtn" type="button" name="button" onclick = "goToDashboard()">최신글</a>
-      <a class = "menubtn" type="button" name="button" onclick = "goToRanking()">순위</a>
-      <a class = "menubtn" type="button" name="button" onclick = "goToWritePage()">글쓰기</a>
-    </div>
-  </div>
+    <ul class="nav" id = "menu">
+  <li class="nav-item">
+    <a class="nav-link disabled" href="notice.html">공지사항</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="popular.html">인기글</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="dashboard.html">최신글</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="posting.html">글쓰기</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="user_rank_page.html">유저순위</a>
+  </li>
+</ul>
 </nav>
 
 <body>
