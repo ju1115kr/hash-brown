@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<title>랭킹</title>
+  <style media="screen">
+    #topMenu {
+      height: 150px;
+      border-bottom: outset;
+      border-right: outset;
+    }
+    #menu {
+      display: flex;
+      align-items: center;
+      margin: auto;
+      padding: 10px;
+    }
+    input#search {
+      width: 30%;
+      border: 1px solid #B3ABBA;
+      border-radius: 10px;
+      font-size: 10pt;
+      font-family: 'kopub dotum';
+      background-size: 20px;
+      background-position: 95% center;
+      opacity: 0.5;
+      letter-spacing: -0.3px;
+    }
+    button {
+      width: 60px;
+      border-radius: 10px;
+      height: auto;
+      background: #1b5ac2;
+      outline: none;
+      color: #ffffff;
+    }
+    .menubtn {
+      width: 70px;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: 10px;
+      height: auto;
+      outline: none;
+      color: rgb(143,143,143);
+      font-weight: bold;
+      font-family: fantasy;
+    }
+    input.log {
+      width: 70px;
+      border: 1px solid #B3ABBA;
+      border-radius: 10px;
+      font-size: 10pt;
+      font-family: 'kopub dotum';
+      background-size: 20px;
+      background-position: 95% center;
+      opacity: 0.5;
+      letter-spacing: -0.3px;
+    }
+
+    #users {
+    font-size: 20px;
+    padding-right: 15px;
+    font-weight: bold;
+    }
+    #sidebar {
+    width: 250px;
+    padding: 20px;
+    margin-bottom: 20px;
+    float: right;
+    border: 1px solid #bcbcbc;
+    }
+    #all {
+      padding: 20px;
+    }
+    #tier_table{
+    width: 250px;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    float: left;
+    border: 2px solid #bcbcbc;
+    text-align: center;
+    }
+    #rank_list{
+    width: 1250px;
+    margin-left: 25px;
+    padding-left: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    float: left;
+    text-align: left;
+    }
+    #userrank_title{
+    width: 1100px;
+    float: left;
+    text-align: left;
+    font-size: 2.0em;
+    font-weight: bold;
+    }
+    #user_search{
+    float: right;
+    text-align: left;
+    font-size: 30px;
+    }
+    #user_list{
+    width: 1100px;
+    margin-top: 50px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    float: left;
+    text-align: left;
+    font-size: 30px;\
+    }
+    #userlist{
+    float: left;
+    text-align: left;
+    font-size: 30px;\
+    }
+    #user_star{
+    float: right;
+    text-align: left;
+    font-size: 30px;\
+    }
+  </style>
+</head>
+
+<nav>
+  <div id = "topMenu">
+    <div id = "navBar">
+      <div id = "logo" style= 'display:inline;'>
+        <img src="resources/rnp-logo.png" width="30%" height="30%" margin= "30px;">
+      </div>
+      <div id = "searchBar" style= 'display:inline; margin-left: 70px;'>
+        <input type="text" id = "search" placeholder="검색어 입력">
+        <button type="button" name="searchButton">검색</button>
+      </div>
+      <div id ="log" style = 'display:inline; margin-left: 100px;'>
+        <input class = "log" id = "id" type="text" placeholder="id">
+        <input class = "log" id = "password" type="password" placeholder="password">
+        <button type="button" name="loginButton" onclick="logIn($('#id').val(),$('#password').val())">로그인</button>
+      </div>
+    </div>
+    <div id = "menu">
+      <a class = "menubtn" type="button" name="button" onclick = "goToNotice()">공지사항</a>
+      <a class = "menubtn" type="button" name="button" onclick = "goToPopular()">인기글</a>
+      <a class = "menubtn" type="button" name="button" onclick = "goToDashboard()">최신글</a>
+      <a class = "menubtn" type="button" name="button" onclick = "goToRanking()">순위</a>
+      <a class = "menubtn" type="button" name="button" onclick = "goToWritePage()">글쓰기</a>
+    </div>
+  </div>
+</nav>
+
+<body>
+  <div id="all">
+    <div id="tier_table">
+      <div style="font-weight: bold; font-size:2.4em;">
+        티어
+      </div>
+
+      <div id= "tiertable" style="font-size: 1.5em; font-weight: bold">
+        <br>
+        <img src='resources/diamond.png' width="15px"></img>&nbsp;다이아몬드<br>
+        <img src='resources/star.jpg' width="15px"></img><font size="3em" color="#707070">100,000~</font><br><br>
+        <img src='resources/platinum.png' width="15px"></img>&nbsp;플래티넘<br>
+        <img src='resources/star.jpg' width="15px"></img><font size="3em" color="#707070">50,000~99,999</font><br><br>
+        <img src='resources/gold.png' width="15px"></img>&nbsp;골드<br>
+        <img src='resources/star.jpg' width="15px"></img><font size="3em" color="#707070">10,000~49,999</font><br><br>
+        <img src='resources/silver.png' width="15px"></img>&nbsp;실버<br>
+        <img src='resources/star.jpg' width="15px"></img><font size="3em" color="#707070">5,000~9,999</font><br><br>
+        <img src='resources/bronze.png' width="15px"></img>&nbsp;브론즈<br>
+        <img src='resources/star.jpg' width="15px"></img><font size="3em" color="#707070">0~4,999</font><br><br>
+      </div>
+    </div>
+
+    <div id="rank_list">
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $.ajax({
+            type: 'GET',
+            url: "http://35.234.3.182:9009/api/v1.0/users",
+            beforeSend: function(xhr) {
+              xhr.setRequestHeader("Authorization", "Basic " + btoa("ksh" + ":" + "ksh"));
+            },
+            data: {},
+            success: function(data) {
+              console.log("success");
+              tempdata = data;
+              for (var i = 0; i < tempdata.users.length; i++) {
+                var tempName = tempdata.users[i].username;
+                var tempStar = tempdata.users[i].starcount;
+                var space = " ";
+                var count = i + 1;
+                $("#userlist").append(count + " - ");
+                if(tempStar > 99999)
+                  $("#userlist").append("<img src = 'resources/diamond.png' height = 30px; width = 30px;></img>");
+                else if(tempStar > 49999)
+                  $("#userlist").append("<img src = 'resources/platinum.png' height = 30px; width = 30px;></img>");
+                else if(tempStar > 9999)
+                  $("#userlist").append("<img src = 'resources/gold.png' height = 30px; width = 30px;></img>");
+                else if(tempStar > 4999)
+                  $("#userlist").append("<img src = 'resources/silver.png' height = 30px; width = 30px;></img>");
+                else if(tempStar >= 0)
+                  $("#userlist").append("<img src = 'resources/bronze.png' height = 30px; width = 30px;></img>");
+                $("#userlist").append(space + tempName + space + "<img src = 'resources/user.jpg' height = 30px; width = 30px;></img>" + "</br>");
+                $("#user_star").append("<img src = 'resources/star.jpg' height = 30px; width = 30px;>" + tempStar + "</br>");
+              }
+            },
+            error: function() {
+              alert("user-ranking error!");
+            }
+          })
+        });
+      </script>
+      <div id="userrank_title">
+        유저랭킹<br>
+        <div id="user_search">
+          <div style="height: 40px; width:400px; border: 1px solid #1b5ac2; background: #ffffff">
+            <input type="text" placeholder = "아이디 입력" id="searchid" style="font-size: 16px; width: 325px; padding: 10px; border: 0px; outline: none; float: left"/>
+            <input type="button" value="검색" id="getResult" style="width: 50px; height: 100%; border: 0px; background: #1b5ac2; outline: none; float: right; color: #ffffff"/>
+            <script type="text/javascript">
+              $("#getResult").click(function() {
+                var $id = $("#searchid").val();
+                var searchurl = "http://35.234.3.182:9009/api/v1.0/users/" + $id;
+                $.ajax({
+                  type: 'GET',
+                  url: searchurl,
+                  beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + btoa("ksh" + ":" + "ksh"));
+                  },
+                  data: {},
+                  success: function(data) {
+                    $(".user_list_class").empty();
+                    $(".user_star_class").empty();
+                    console.log("success");
+                      var tempName = data.username;
+                      var tempStar = data.starcount;
+                      var space = " ";
+                      if(tempStar > 99999)
+                        $("#userlist").append("<img src = 'resources/diamond.png' height = 30px; width = 30px;></img>");
+                      else if(tempStar > 49999)
+                        $("#userlist").append("<img src = 'resources/platinum.png' height = 30px; width = 30px;></img>");
+                      else if(tempStar > 9999)
+                        $("#userlist").append("<img src = 'resources/gold.png' height = 30px; width = 30px;></img>");
+                      else if(tempStar > 4999)
+                        $("#userlist").append("<img src = 'resources/silver.png' height = 30px; width = 30px;></img>");
+                      else if(tempStar >= 0)
+                        $("#userlist").append("<img src = 'resources/bronze.png' height = 30px; width = 30px;></img>");
+                      $("#userlist").append(space + tempName + space + "<img src = 'resources/user.jpg' height = 30px; width = 30px;></img>" + "</br>");
+                      $("#user_star").append("<img src = 'resources/star.jpg' height = 30px; width = 30px;>" + tempStar + "</br>");
+                  },
+                  error: function() {
+                    alert("user-ranking error!");
+                  }
+                })
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+      <div id="user_list">
+        <div id="userlist" class = "user_list_class">
+        </div>
+        <div id="user_star" class = "user_star_class">
+        </div>
+      </div>
+    </div>
+
+    <div id="sidebar">
+      <script type="text/javascript">
+      $(document).ready(function() {
+        $.ajax({
+          type: 'GET',
+          url: "http://35.234.3.182:9009/api/v1.0/users/star",
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa("ksh" + ":" + "ksh"));
+          },
+          data: {},
+          success: function(data) {
+            console.log("success");
+            tempdata = data;
+            for (var i = 0; i < tempdata.users.length; i++) {
+              var tempName = tempdata.users[i].realname;
+              var tempStar = tempdata.users[i].starcount;
+              var space = " ";
+              var count = i + 1;
+              $("#users").append(count + ". " + space + "<img src = 'resources/silver.png' height = 15px; width = 15px;></img>" + space + tempName + "<img src = 'resources/star.jpg' height = 15px; width = 15px;>" + tempStar +
+              "</br>");
+            }
+          },
+          error: function() {
+            alert("user-ranking error!");
+          }
+        })
+      });
+    </script>
+    <div id="category">
+      <h2>주제</h2>
+      <h5>정치</h5>
+      <h5>경제</h5>
+      <h5>사회</h5>
+      <h5>시사</h5>
+      <h5>연예</h5>
+      <h5>스포츠</h5>
+      <h5>기타<hr></h5>
+    </div>
+    <table id="users">
+      <h2>유저순위</h2>
+    </table>
+  </div>
+</div>
+</body>
+</html>
