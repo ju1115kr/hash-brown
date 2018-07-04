@@ -81,7 +81,7 @@
   <div id="topMenu">
     <div id="navBar">
       <div id="logo" style='display:inline;'>
-        <img src="resources/logo.png" width="30%" height="30%" margin="30px;">
+        <img src="../resources/logo.png" width="30%" height="30%" margin="30px;">
       </div>
       <div id="searchBar" style='display:inline; margin-left: 70px;'>
         <input type="text" id="search" placeholder="검색어 입력">
@@ -121,16 +121,16 @@
 
       <div id= "tiertable" style="font-size: 1.5em; font-weight: bold">
         <br>
-        <img src='resources/diamond.png' width="15px"></img>&nbsp;다이아몬드<br>
-        <img src='resources/star.jpg' width="15px"></img><font size="3em" color="#707070">100,000~</font><br><br>
-        <img src='resources/platinum.png' width="15px"></img>&nbsp;플래티넘<br>
-        <img src='resources/star.jpg' width="15px"></img><font size="3em" color="#707070">50,000~99,999</font><br><br>
-        <img src='resources/gold.png' width="15px"></img>&nbsp;골드<br>
-        <img src='resources/star.jpg' width="15px"></img><font size="3em" color="#707070">10,000~49,999</font><br><br>
-        <img src='resources/silver.png' width="15px"></img>&nbsp;실버<br>
-        <img src='resources/star.jpg' width="15px"></img><font size="3em" color="#707070">5,000~9,999</font><br><br>
-        <img src='resources/bronze.png' width="15px"></img>&nbsp;브론즈<br>
-        <img src='resources/star.jpg' width="15px"></img><font size="3em" color="#707070">0~4,999</font><br><br>
+        <img src='../resources/diamond.png' width="15px"></img>&nbsp;다이아몬드<br>
+        <img src='../resources/star.jpg' width="15px"></img><font size="3em" color="#707070">100,000~</font><br><br>
+        <img src='../resources/platinum.png' width="15px"></img>&nbsp;플래티넘<br>
+        <img src='../resources/star.jpg' width="15px"></img><font size="3em" color="#707070">50,000~99,999</font><br><br>
+        <img src='../resources/gold.png' width="15px"></img>&nbsp;골드<br>
+        <img src='../resources/star.jpg' width="15px"></img><font size="3em" color="#707070">10,000~49,999</font><br><br>
+        <img src='../resources/silver.png' width="15px"></img>&nbsp;실버<br>
+        <img src='../resources/star.jpg' width="15px"></img><font size="3em" color="#707070">5,000~9,999</font><br><br>
+        <img src='../resources/bronze.png' width="15px"></img>&nbsp;브론즈<br>
+        <img src='../resources/star.jpg' width="15px"></img><font size="3em" color="#707070">0~4,999</font><br><br>
       </div>
     </div>
 
@@ -154,17 +154,17 @@
                 var count = i + 1;
                 $("#userlist").append(count + " - ");
                 if(tempStar > 99999)
-                  $("#userlist").append("<img src = 'resources/diamond.png' height = 30px; width = 30px;></img>");
+                  $("#userlist").append("<img src = '../resources/diamond.png' height = 30px; width = 30px;></img>");
                 else if(tempStar > 49999)
-                  $("#userlist").append("<img src = 'resources/platinum.png' height = 30px; width = 30px;></img>");
+                  $("#userlist").append("<img src = '../resources/platinum.png' height = 30px; width = 30px;></img>");
                 else if(tempStar > 9999)
-                  $("#userlist").append("<img src = 'resources/gold.png' height = 30px; width = 30px;></img>");
+                  $("#userlist").append("<img src = '../resources/gold.png' height = 30px; width = 30px;></img>");
                 else if(tempStar > 4999)
-                  $("#userlist").append("<img src = 'resources/silver.png' height = 30px; width = 30px;></img>");
+                  $("#userlist").append("<img src = '../resources/silver.png' height = 30px; width = 30px;></img>");
                 else if(tempStar >= 0)
-                  $("#userlist").append("<img src = 'resources/bronze.png' height = 30px; width = 30px;></img>");
-                $("#userlist").append(space + tempName + space + "<img src = 'resources/user.jpg' height = 30px; width = 30px;></img>" + "</br>");
-                $("#user_star").append("<img src = 'resources/star.jpg' height = 30px; width = 30px;>" + tempStar + "</br>");
+                  $("#userlist").append("<img src = '../resources/bronze.png' height = 30px; width = 30px;></img>");
+                $("#userlist").append(space + tempName + space + "<img src = '../resources/user.jpg' height = 30px; width = 30px;></img>" + "</br>");
+                $("#user_star").append("<img src = '../resources/star.jpg' height = 30px; width = 30px;>" + tempStar + "</br>");
               }
             },
             error: function() {
@@ -198,17 +198,17 @@
                       var tempStar = data.starcount;
                       var space = " ";
                       if(tempStar > 99999)
-                        $("#userlist").append("<img src = 'resources/diamond.png' height = 30px; width = 30px;></img>");
+                        $("#userlist").append("<img src = '../resources/diamond.png' height = 30px; width = 30px;></img>");
                       else if(tempStar > 49999)
-                        $("#userlist").append("<img src = 'resources/platinum.png' height = 30px; width = 30px;></img>");
+                        $("#userlist").append("<img src = '../resources/platinum.png' height = 30px; width = 30px;></img>");
                       else if(tempStar > 9999)
-                        $("#userlist").append("<img src = 'resources/gold.png' height = 30px; width = 30px;></img>");
+                        $("#userlist").append("<img src = '../resources/gold.png' height = 30px; width = 30px;></img>");
                       else if(tempStar > 4999)
-                        $("#userlist").append("<img src = 'resources/silver.png' height = 30px; width = 30px;></img>");
+                        $("#userlist").append("<img src = '../resources/silver.png' height = 30px; width = 30px;></img>");
                       else if(tempStar >= 0)
-                        $("#userlist").append("<img src = 'resources/bronze.png' height = 30px; width = 30px;></img>");
-                      $("#userlist").append(space + tempName + space + "<img src = 'resources/user.jpg' height = 30px; width = 30px;></img>" + "</br>");
-                      $("#user_star").append("<img src = 'resources/star.jpg' height = 30px; width = 30px;>" + tempStar + "</br>");
+                        $("#userlist").append("<img src = '../resources/bronze.png' height = 30px; width = 30px;></img>");
+                      $("#userlist").append(space + tempName + space + "<img src = '../resources/user.jpg' height = 30px; width = 30px;></img>" + "</br>");
+                      $("#user_star").append("<img src = '../resources/star.jpg' height = 30px; width = 30px;>" + tempStar + "</br>");
                   },
                   error: function() {
                     alert("user-ranking error!");
@@ -227,48 +227,54 @@
       </div>
     </div>
 
+
     <div id="sidebar">
       <script type="text/javascript">
-      $(document).ready(function() {
-        $.ajax({
-          type: 'GET',
-          url: "http://35.234.3.182:9009/api/v1.0/users/star",
-          beforeSend: function(xhr) {
-            xhr.setRequestHeader("Authorization", "Basic " + btoa("ksh" + ":" + "ksh"));
-          },
-          data: {},
-          success: function(data) {
-            console.log("success");
-            tempdata = data;
-            for (var i = 0; i < tempdata.users.length; i++) {
-              var tempName = tempdata.users[i].realname;
-              var tempStar = tempdata.users[i].starcount;
-              var space = " ";
-              var count = i + 1;
-              $("#users").append(count + ". " + space + "<img src = 'resources/silver.png' height = 15px; width = 15px;></img>" + space + tempName + "<img src = 'resources/star.jpg' height = 15px; width = 15px;>" + tempStar +
-              "</br>");
+        $(document).ready(function() {
+          $.ajax({
+            type: 'GET',
+            url: "http://35.234.3.182:9009/api/v1.0/users/star",
+            beforeSend: function(xhr) {
+              xhr.setRequestHeader("Authorization", "Basic " + btoa("minsangkim" + ":" + "1234"));
+            },
+            data: {},
+            success: function(data) {
+              console.log("success");
+              tempdata = data;
+              for (var i = 0; i < tempdata.users.length; i++) {
+                var tempName = tempdata.users[i].realname;
+                var tempStar = tempdata.users[i].starcount;
+                var space = " ";
+                var count = i + 1;
+                $("#users").append(count + ". " + space + "<img src = '../resources/silver.png' height = 15px; width = 15px;></img>" + space + tempName + "<img src = '../resources/star.jpg' height = 15px; width = 15px;>" + tempStar +
+                  "</br>");
+              }
+            },
+            error: function() {
+              alert("user-ranking error!");
             }
-          },
-          error: function() {
-            alert("user-ranking error!");
-          }
-        })
-      });
-    </script>
-    <div id="category">
-      <h2>주제</h2>
-      <h5>정치</h5>
-      <h5>경제</h5>
-      <h5>사회</h5>
-      <h5>시사</h5>
-      <h5>연예</h5>
-      <h5>스포츠</h5>
-      <h5>기타<hr></h5>
+          })
+        });
+      </script>
+      <div class="container">
+        <h2><span class="badge badge-secondary">주제</span></h2>
+        <h6>정치</h6>
+        <h6>경제</h6>
+        <h6>사회</h6>
+        <h6>시사</h6>
+        <h6>연예</h6>
+        <h6>스포츠</h6>
+        <h6>경제<hr></h6>
+      </div>
+      <div class="table-responsive">
+        <table class = "table" id="users">
+          <h2><span class="badge badge-secondary">유저순위</span></h2>
+        </table>
+      </div>
     </div>
-    <table id="users">
-      <h2>유저순위</h2>
-    </table>
-  </div>
+
+
+
 </div>
 </body>
 </html>
