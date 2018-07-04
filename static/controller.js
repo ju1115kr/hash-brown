@@ -26,24 +26,3 @@ function logIn(iid, ipass) {
     })
   }
 }
-
-function goToNotice() {
-  location.href = "notice.html";
-  $("#notice").css("text-color", "red");
-}
-
-function goToPopular() {
-  location.href = "popular.html";
-}
-
-function goToDashboard() {
-  location.href = "dashboard.html";
-}
-
-function goToRanking() {
-  location.href = "";
-}
-
-function goToWritePage() {
-  location.href = "posting.html";
-}
