@@ -74,7 +74,7 @@ def transactionStar(targetID,likeCount):
     tx_receipt = web3.eth.getTransactionReceipt(tx_hash)
     contract_address = tx_receipt['contractAddress']
 
-return contract_address
+    return contract_address
 
 #abi = contract_interface['abi']
 #contract_instance = w3.eth.contract(address=contract_address, abi=abi,ContractFactoryClass=ConciseContract)
