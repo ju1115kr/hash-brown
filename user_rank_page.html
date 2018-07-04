@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="controller.js"></script>
+
+  <script language="javascript">
+    function showPopup() { window.open("membership.html", "Membership", "width=250px, height=141px, left=500, top=100"); }
+  </script>
+
 	<title>랭킹</title>
   <style media="screen">
     #users {
@@ -92,6 +97,7 @@
         <input class="log" id="id" type="text" placeholder="id">
         <input class="log" id="password" type="password" placeholder="password">
         <button type="button" class="btn btn-primary" id="loginButton" onclick="logIn($('#id').val(), $('#password').val())">Login</button>
+        <button type="button" class="btn btn-primary" id="membershipButton" onclick="showPopup()">회원가입</button>
       </div>
     </div>
     <ul class="nav" id = "menu">
@@ -210,10 +216,6 @@
                         $("#userlist").append("<img src = '../resources/bronze.png' height = 30px; width = 30px;></img>");
                       $("#userlist").append(space + tempName + space + "<img src = '../resources/user.jpg' height = 30px; width = 30px;></img>" + "</br>");
                       $("#user_star").append("<img src = '../resources/star.jpg' height = 30px; width = 30px;>" + tempStar + "</br>");
-
-
-
-
                   },
                   error: function() {
                     alert("user-ranking error!");
@@ -231,8 +233,6 @@
         </div>
       </div>
     </div>
-
-
     <div id="sidebar">
       <script type="text/javascript">
         $(document).ready(function() {
@@ -251,6 +251,7 @@
                 var tempStar = tempdata.users[i].starcount;
                 var space = " ";
                 var count = i + 1;
+                $("#users").append(count + space);
                 if(tempStar > 99999)
                   $("#users").append("<img src = '../resources/diamond.png' height = 30px; width = 30px;></img>");
                 else if(tempStar > 49999)
@@ -261,7 +262,7 @@
                   $("#users").append("<img src = '../resources/silver.png' height = 30px; width = 30px;></img>");
                 else if(tempStar >= 0)
                   $("#users").append("<img src = '../resources/bronze.png' height = 30px; width = 30px;></img>");
-                $("#users").append(space + tempName + space + "<img src = '../resources/user.jpg' height = 30px; width = 30px;></img>" + "<img src = '../resources/star.jpg' height = 30px; width = 30px;>" + tempStar + "</br>");
+                $("#users").append(space + tempName + space + "<img src = '../resources/user.jpg' height = 30px; width = 30px;></img>" + space + "<img src = '../resources/star.jpg' height = 30px; width = 30px;>" + space + tempStar + "</br>");
               }
             },
             error: function() {
@@ -286,9 +287,6 @@
         </table>
       </div>
     </div>
-
-
-
 </div>
 </body>
 </html>
