@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="../stylesheets/navstyle.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <nav>
   <div id="topMenu">
@@ -11,23 +12,91 @@
       <div id="logo" style='display:inline;'>
         <img src="../resources/logo.png" width="30%" height="30%" margin="30px;">
       </div>
-      <div id="searchBar" style='display:inline; margin-left: 70px;'>
-        <input type="text" id="search" placeholder="검색어 입력">
-        <button type="button" name="searchButton">검색</button>
+      <div id="searchBar" style='display:inline; margin-left: 30px;'>
+        <input type="text" id="search" placeholder="Search...">
+        <button type="button" class="btn btn-info" id="searchButton">Search</button>
+        <script type="text/javascript">
+          $("#searchButton").click(function() {
+            if ($("#search").val() === "") {
+              alert("검색어를 입력해 주세요.");
+            } else {
+              ajaxSearch($("#search").val());
+            }
+          })
+
+          function ajaxSearch(keyword) {
+            $.ajax({
+              type: 'GET',
+              url: "http://35.234.3.182:9009/api/v1.0/search/news/"+keyword,
+              beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "Basic " + btoa("minsangkim" + ":" + "1234"));
+              },
+              data: {},
+              success: function(data) {
+                tempdata = data;
+                var init = 0;
+                console.log();
+                $("#articles").empty();
+                for (var i = 0; i < data.length; i++) {
+                  if (tempdata.news[i].title !== undefined) {
+                    init = i;
+                    break;
+                  }
+                }
+                //$("#articles").append("<img src = '../resources/goeun.jpg' height = 100px; width = 200px;></img>");
+                for (var i = init; i < init + 7; i++) {
+                  var tempTitle = tempdata.news[i].title;
+                  var tempAuthor = tempdata.news[i].author;
+                  var tempStar = tempdata.news[i].starcount;
+                  var tempField = tempdata.news[i].field;
+                  var tempAsso = tempdata.news[i].associated_reply;
+                  var news_id = tempdata.news[i].id;
+                  var url = "news_view.html?news_id=" + news_id;
+                  var space = " ";
+                  $("#articles").append("</br><img src = '../resources/news.jpg' height = 100px; width = 200px;></img>");
+                  $("#articles").append("<span><a href = " + url + ">" + space + tempTitle + space);
+                  $("#articles").append("</a></br><img src = '../resources/user.jpg' width = 15px; height = 15px;></img>" + space + tempAuthor + space);
+                  $("#articles").append("<img src = '../resources/star.jpg' width = 15px; height = 15px;></img>" + space + tempStar + space);
+                  $("#articles").append("<img src = '../resources/agree.jpg' width = 15px; height = 15px;></img></span>" + space + tempAsso + "</br><hr>");
+                }
+
+              },
+              error: function() {
+                console.log("article error!");
+              }
+            })
+          }
+        </script>
       </div>
-      <div id="log" style='display:inline; margin-left: 100px;'>
+      <div id="log" style='display:inline; margin-left: 10px;'>
         <input class="log" id="id" type="text" placeholder="id">
         <input class="log" id="password" type="password" placeholder="password">
-        <button type="button" id="loginButton" onclick="logIn($('#id').val(),$('#password').val())">로그인</button>
+        <button type="button" class="btn btn-primary" id="loginButton" onclick="logIn($('#id').val(), $('#password').val())">Login</button>
+        <button type="button" class="btn btn-primary" id="membershipButton" onclick="showPopup()">회원가입</button>
+        <script language="javascript">
+          function showPopup() {
+            window.open("membership.html", "Membership", "width=250px, height=141px, left=500, top=100");
+          }
+        </script>
       </div>
     </div>
-    <div id="menu">
-      <a class="menubtn" id="notice" type="button" name="button" onclick="goToNotice()">공지사항</a>
-      <a class="menubtn" id="popular" type="button" name="button" onclick="goToPopular()">인기글</a>
-      <a class="menubtn" id="latest" type="button" name="button" onclick="goToDashboard()">최신글</a>
-      <a class="menubtn" id="rangking" type="button" name="button" onclick="goToRanking()">순위</a>
-      <a class="menubtn" id="write" type="button" name="button" onclick="goToWritePage()">글쓰기</a>
-    </div>
+    <ul class="nav" id="menu">
+      <li class="nav-item">
+        <a class="nav-link disabled" href="notice.html">공지사항</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="popular.html">인기글</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="dashboard.html">최신글</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="posting.html">글쓰기</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="user_rank_page.html">유저순위</a>
+      </li>
+    </ul>
 </nav>
 
 <body>
