@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <style>
+    #title {
+      width: 150px;
+      height: 70%;
+      float: left;
+    }
+
+    #write {
+      width: 200px;
+      height: 70%;
+      float: right;
+    }
+
+    #button {
+      width: 350px;
+      margin-bottom: 10px;
+      align-content: : center;
+    }
+  </style>
+  <title>회원가입</title>
+</head>
+
+<body>
+
+
+  <table border="0" style="width: 250px; text-align: left">
+    <tr>
+      <td>ID :</td>
+      <td>
+        <input class="log" id="id" type="text" placeholder="id">
+      </td>
+    </tr>
+    <tr>
+      <td>PW :</td>
+      <td>
+      <input class="log" id="password" type="password" placeholder="password">
+    </td>
+    </tr>
+    <tr>
+      <td>NAME :</td>
+      <td>
+      <input class="log" id="name" type="text" placeholder="name">
+    </td>
+    </tr>
+    <tr>
+      <td colspan=2 style="text-align: center">
+        <button type="button" class="btn btn-primary" id="membershipButton" onclick="join($('#id').val(),$('#password').val(),$('#name').val())">회원가입</button>
+        </td>
+    </tr>
+  </table>
+<script type="text/javascript">
+  function join(id_var,pw_var,name_var){
+    jsondata = JSON.stringify({
+      id: id_var,
+      pw: pw_var,
+      name: name_var
+    });
+    $.ajax({
+      type: "POST",
+      url: "http://35.234.3.182:9009/api/v1.0/users",
+      contentType: 'application/json; charset=utf-8',
+      traditional: true,
+      async: false,
+      data: jsondata,
+      success: function(data) {
+        console.log("success");
+      },
+      error: function() {
+        alert("user-ranking error!");
+      }
+      })
+    };
+</script>
+</body>
+
+</html>
