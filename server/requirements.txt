@@ -24,7 +24,7 @@ eth-pm==0.1.0a17
 eth-rlp==0.1.2
 eth-tester==0.1.0b26
 eth-utils==1.0.3
-eventlet==0.23.0
+eventlet==0.31.0
 Flask==1.0.2
 Flask-Cors==3.0.6
 Flask-HTTPAuth==3.2.4
